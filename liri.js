@@ -6,8 +6,9 @@ var request = require("request");
 
 var moment = require("moment");
 
+var keys = require("./keys");
 
-// var spotify = new Spotify(keys.spotify);
+var spotify = new Spotify(keys.spotify);
 
 
 
@@ -34,13 +35,13 @@ if (type === "concert-this") {
     })
 } else if (type === "spotify-this-song") {
     
-    // spotify.search({type: track, query: search}, function(err, data) {
-    //     if (err) {
-    //         console.log(err);
-    //     } else {
-    //         console.log(data);
-    //     }
-    // })
+    spotify.search({type: track, query: search}, function(err, data) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(data);
+        }
+    })
 } else if (type === "movie-this") {
     var queryUrl = "http://www.omdbapi.com/?t=" + search + "&y=&plot=short&apikey=trilogy"
     
@@ -61,7 +62,7 @@ if (type === "concert-this") {
 } else if (type === "do-what-it-says") {
     
 } else {
-    console.log("some error message");
+    console.log("Please use one of the following methods: concert-this, spotify-this-song, movie-this, or do-what-it-says");
 };
 
 
