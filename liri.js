@@ -19,16 +19,19 @@ var search = process.argv.slice(3).join(" ");
 if (type === "concert-this") {
     var queryUrl = "https://rest.bandsintown.com/artists/" + search + "/events?app_id=codingbootcamp";
 
-    // request(queryUrl, function(error, response, body) {
-    //     if (!error && response.statusCode === 200) {
-    //         // for (i = 0; i < response.length; i++) {
-    //         //     console.log((response[i]));
-    //         // }
-    //         console.log(JSON.parse(body).offers);
-    //     } else {
-    //         console.log(error);
-    //     }
-    // })
+    request(queryUrl, function(error, response, body, ) {
+        if (!error && response.statusCode === 200) {
+            var data = JSON.parse(body);
+            for (i = 0; i < data.length; i++) {
+                console.log("\nVenue: " + data[i].venue.name);
+                console.log("Location: " + data[i].venue.city + ", " + data[i].venue.region);
+                var date = moment(data[i].datetime).format("MM/DD/YYYY")
+                console.log("Date: " + date);
+            }
+        } else {
+            console.log(error);
+        }
+    })
 } else if (type === "spotify-this-song") {
     
     // spotify.search({type: track, query: search}, function(err, data) {
@@ -43,14 +46,14 @@ if (type === "concert-this") {
     
     request(queryUrl, function(error, response, body) {
         if (!error && response.statusCode === 200) {
-            console.log(JSON.parse(body).Title);
-            console.log(JSON.parse(body).Year);
-            console.log(JSON.parse(body).imdbRating);
-            console.log(JSON.parse(body).Ratings[1].Value);
-            console.log(JSON.parse(body).Country);
-            console.log(JSON.parse(body).Language);
-            console.log(JSON.parse(body).Plot);
-            console.log(JSON.parse(body).Actors);
+            console.log("\nTitle: " + JSON.parse(body).Title);
+            console.log("Year: " + JSON.parse(body).Year);
+            console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
+            console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
+            console.log("Country: " + JSON.parse(body).Country);
+            console.log("Language: " + JSON.parse(body).Language);
+            console.log("Plot: " + JSON.parse(body).Plot);
+            console.log("Actors: " + JSON.parse(body).Actors);
         } else {
             console.log(error);
         }
