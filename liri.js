@@ -14,13 +14,13 @@ var spotify = new Spotify(keys.spotify);
 
 
 var type = process.argv[2];
-var search = process.argv.slice(3).join(" ");
+var search = process.argv.slice(3).join("%20");
 
 
 if (type === "concert-this") {
     var queryUrl = "https://rest.bandsintown.com/artists/" + search + "/events?app_id=codingbootcamp";
 
-    request(queryUrl, function(error, response, body, ) {
+    request(queryUrl, function(error, response, body) {
         if (!error && response.statusCode === 200) {
             var data = JSON.parse(body);
             for (i = 0; i < data.length; i++) {
@@ -35,14 +35,36 @@ if (type === "concert-this") {
     })
 } else if (type === "spotify-this-song") {
     
-    spotify.search({type: track, query: search}, function(err, data) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(data);
-        }
-    })
+    if (!search) {
+        search = "the sign ace of base";
+    }
+    spotify.search({
+            type: 'track',
+            query: search
+        },
+
+        function (error, data) {
+            if (error) {
+                console.log('Error: ' + error);
+            } else {
+                for (var i = 0; i < data.tracks.items[0].artists.length; i++) {
+                    if (i === 0) {
+                        console.log("Artist(s): " + data.tracks.items[0].artists[i].name);
+                    } else {
+                        console.log(" " + data.tracks.items[0].artists[i].name);
+                    }
+                }
+                console.log("Song: " + data.tracks.items[0].name);
+                console.log("Preview Link: " + data.tracks.items[0].preview_url);
+                console.log("Album: " + data.tracks.items[0].album.name);
+            }
+
+        });
+
 } else if (type === "movie-this") {
+    if (!search) {
+        search = "Mr.%20Nobody"
+    }
     var queryUrl = "http://www.omdbapi.com/?t=" + search + "&y=&plot=short&apikey=trilogy"
     
     request(queryUrl, function(error, response, body) {
@@ -50,7 +72,11 @@ if (type === "concert-this") {
             console.log("\nTitle: " + JSON.parse(body).Title);
             console.log("Year: " + JSON.parse(body).Year);
             console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
-            console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
+            for (var i = 0; i < JSON.parse(body).Ratings.length; i++) {
+                if (JSON.parse(body).Ratings[i].Source === "Rotten Tomatoes") {
+                    console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[i].Value);
+                }
+            };
             console.log("Country: " + JSON.parse(body).Country);
             console.log("Language: " + JSON.parse(body).Language);
             console.log("Plot: " + JSON.parse(body).Plot);
