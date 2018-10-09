@@ -13,8 +13,6 @@ var keys = require("./keys");
 var spotify = new Spotify(keys.spotify);
 
 
-
-
 var type = process.argv[2];
 var search = process.argv.slice(3).join("%20");
 
@@ -115,9 +113,7 @@ if (type === "concert-this") {
                     console.log("Preview Link: " + data.tracks.items[0].preview_url);
                     console.log("Album: " + data.tracks.items[0].album.name);
                 }
-    
-            });
-    
+            });    
         }
     })
 } else {
