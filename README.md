@@ -17,8 +17,25 @@ When using "spotify-this-song", type any song title into the CLI after "spotify-
   * Preview link from Spotify
   * Album 
   
+![spotify-this-song image 2](images/spotify-this-song2.png)
 
-  
+If no song name is entered, it will default to search for "The Sign" by Ace of Base.
+
+![spotify-this-song image](images/spotify-this-song-none.png)
+
+When using "movie-this", type any movie title into the CLI after "movie-this" and it will return data about that movie. The following information will be displayed:
+ * Title
+ * Year
+ * IMBD Rating
+ * Rotten Tomatoes Rating
+ * Country
+ * Language
+ * Plot
+ * Actors
+ 
+![movie-this](images/movie-this.png)
+
+If no movie name is entered, it will default to search for the movie, Mr. Nobody.
 
 
 
