@@ -17,7 +17,7 @@ When using "spotify-this-song", type any song title into the CLI after "spotify-
   * Preview link from Spotify
   * Album 
   
-![spotify-this-song image](images/spotify-this-song.png)
+
   
 
 
