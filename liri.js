@@ -1,5 +1,7 @@
 require("dotenv").config();
 
+var fs = require("fs");
+
 var Spotify = require("node-spotify-api");
 
 var request = require("request");
@@ -39,13 +41,13 @@ if (type === "concert-this") {
         search = "the sign ace of base";
     }
     spotify.search({
-            type: 'track',
+            type: "track",
             query: search
         },
 
         function (error, data) {
             if (error) {
-                console.log('Error: ' + error);
+                console.log("Error: " + error);
             } else {
                 for (var i = 0; i < data.tracks.items[0].artists.length; i++) {
                     if (i === 0) {
@@ -87,6 +89,37 @@ if (type === "concert-this") {
     })
 } else if (type === "do-what-it-says") {
     
+    fs.readFile("random.txt", "utf8", function(error, data) {
+        if (error) {
+            console.log(error);
+        } else {
+            textArray = data.split(",");
+
+            spotify.search({
+                type: "track",
+                query: textArray[1]
+            },
+    
+            function (error, data) {
+                if (error) {
+                    console.log("Error: " + error);
+                } else {
+                    for (var i = 0; i < data.tracks.items[0].artists.length; i++) {
+                        if (i === 0) {
+                            console.log("Artist(s): " + data.tracks.items[0].artists[i].name);
+                        } else {
+                            console.log(" " + data.tracks.items[0].artists[i].name);
+                        }
+                    }
+                    console.log("Song: " + data.tracks.items[0].name);
+                    console.log("Preview Link: " + data.tracks.items[0].preview_url);
+                    console.log("Album: " + data.tracks.items[0].album.name);
+                }
+    
+            });
+    
+        }
+    })
 } else {
     console.log("Please use one of the following methods: concert-this, spotify-this-song, movie-this, or do-what-it-says");
 };
