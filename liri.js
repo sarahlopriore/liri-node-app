@@ -49,7 +49,7 @@ if (type === "concert-this") {
             } else {
                 for (var i = 0; i < data.tracks.items[0].artists.length; i++) {
                     if (i === 0) {
-                        console.log("Artist(s): " + data.tracks.items[0].artists[i].name);
+                        console.log("\nArtist(s): " + data.tracks.items[0].artists[i].name);
                     } else {
                         console.log(" " + data.tracks.items[0].artists[i].name);
                     }
@@ -104,7 +104,7 @@ if (type === "concert-this") {
                 } else {
                     for (var i = 0; i < data.tracks.items[0].artists.length; i++) {
                         if (i === 0) {
-                            console.log("Artist(s): " + data.tracks.items[0].artists[i].name);
+                            console.log("\nArtist(s): " + data.tracks.items[0].artists[i].name);
                         } else {
                             console.log(" " + data.tracks.items[0].artists[i].name);
                         }
