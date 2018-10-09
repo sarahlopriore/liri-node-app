@@ -37,8 +37,11 @@ When using "movie-this", type any movie title into the CLI after "movie-this" an
 
 If no movie name is entered, it will default to search for the movie, Mr. Nobody.
 
+![movie-this image 2](images/movie-this-none2.png)
 
+When using "do-what-it-says", no extra input is needed. This takes input from a text file.
 
+![do-what-it-says image](images/do-what-it-says.png)
 
 
 
